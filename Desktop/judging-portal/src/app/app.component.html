@@ -1,0 +1,32 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Judging Portal - Alcheringa
+  </h1>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-bordered">
+        <thead>
+          <th>Registration No.</th>
+          <th>Criterion-1</th>
+          <th>Criterion-2</th>
+          <th>Criterion-3</th>
+        </thead>
+        <tr *ngFor="let user of TableData">
+          <!---- <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.name"></td> -->
+          <td>{{user.registrationNo}}</td> 
+          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion1"></td>
+          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion2"></td>
+          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion3"></td>
+          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+        </tr>
+      </table>
+      <button (click) = "Edit(5)">Save</button>
+    </div>
+
+
+  </div>
+<router-outlet></router-outlet>

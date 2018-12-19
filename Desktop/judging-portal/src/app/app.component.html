@@ -1,4 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+
+</head>
+
 <div style="text-align:center">
   <h1>
     Judging Portal - Alcheringa
@@ -14,8 +20,18 @@
           <th>Criterion-3</th>
           <th>Criterion-4</th>
           <th>Criterion-5</th>
-          <th>Criterion-6</th>
+          
         </thead>
+        <tr>
+          <td>Maximum Marks</td>
+          
+          <td>{{maxMarks.mm1}}</td>
+          <td>{{maxMarks.mm2}}</td>
+          <td>{{maxMarks.mm3}}</td>
+          <td>{{maxMarks.mm4}}</td>
+          <td>{{maxMarks.mm5}}</td>
+        </tr>
+
         <tr *ngFor="let user of TableData">
           <!---- <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.name"></td> -->
           <td>{{user.registrationNo}}</td>
@@ -29,11 +45,17 @@
           <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
           <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion5"></td>
           <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
-          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion6"></td>
-          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+        
         </tr>
+       
       </table>
-      <button (click) = "Edit(5)">Save</button>
+
+      
+
+
+     <button (click) = "Edit(5)" id="btn1"> Save </button>
+     <!----------------button for adding column------------------------------->
+     <!----   <button id="btn2" (click)="add_col()">Add column</button>   -->
     </div>
 
 

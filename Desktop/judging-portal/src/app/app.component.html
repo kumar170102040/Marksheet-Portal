@@ -3,7 +3,7 @@
   <h1>
     Judging Portal - Alcheringa
   </h1>
-
+  <br><br>
   <div class="row">
     <div class="col-lg-12">
       <table class="table table-bordered">
@@ -12,15 +12,24 @@
           <th>Criterion-1</th>
           <th>Criterion-2</th>
           <th>Criterion-3</th>
+          <th>Criterion-4</th>
+          <th>Criterion-5</th>
+          <th>Criterion-6</th>
         </thead>
         <tr *ngFor="let user of TableData">
           <!---- <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.name"></td> -->
-          <td>{{user.registrationNo}}</td> 
+          <td>{{user.registrationNo}}</td>
           <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion1"></td>
           <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
           <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion2"></td>
           <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
           <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion3"></td>
+          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion4"></td>
+          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion5"></td>
+          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
+          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion6"></td>
           <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
         </tr>
       </table>

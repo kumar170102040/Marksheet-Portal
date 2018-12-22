@@ -1,63 +1,48 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
+  
+  </head>
+  
+  <div style="text-align:center">
+    <h1>
+      Judging Portal - Alcheringa
+    </h1>
+    <br><br>
 
-</head>
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="tableForm">
+        <table class="table table-bordered">
+          <thead>
+            <th>Registration No.</th>
+            <th>Criterion-1</th>
+            <div formArrayName="OtherCriterion" class="d-inline" *ngFor="let criteria of OtherCriterion.controls; let i=index">
+                <th>Criterion-{{i+2}}</th>
+            </div>
+          </thead>
 
-<div style="text-align:center">
-  <h1>
-    Judging Portal - Alcheringa
-  </h1>
-  <br><br>
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table table-bordered">
-        <thead>
-          <th>Registration No.</th>
-          <th>Criterion-1</th>
-          <th>Criterion-2</th>
-          <th>Criterion-3</th>
-          <th>Criterion-4</th>
-          <th>Criterion-5</th>
-          
-        </thead>
-        <tr>
-          <td>Maximum Marks</td>
-          
-          <td>{{maxMarks.mm1}}</td>
-          <td>{{maxMarks.mm2}}</td>
-          <td>{{maxMarks.mm3}}</td>
-          <td>{{maxMarks.mm4}}</td>
-          <td>{{maxMarks.mm5}}</td>
-        </tr>
+            <tr>
+              <td><input type="text" formControlName="registrationNo"></td>
+              <td><input type="text" formControlName ="criterion1"></td>
+              <div formArrayName="OtherCriterion" class="d-inline" style="width: auto" *ngFor="let criteria of OtherCriterion.controls; let i=index">
+              <td>
+               <input type="text" [formControlName]="i">
+              </td>
+              </div>
+            </tr>
+            
+         
+          </table>
+        </form>
+        {{tableForm.value | json}}
 
-        <tr *ngFor="let user of TableData">
-          <!---- <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.name"></td> -->
-          <td>{{user.registrationNo}}</td>
-          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion1"></td>
-          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
-          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion2"></td>
-          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
-          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion3"></td>
-          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
-          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion4"></td>
-          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
-          <td *ngIf = "user.id === EditRowID" ><input type="text" [(ngModel)]="user.criterion5"></td>
-          <td *ngIf = "user.id !== EditRowID" (click)="Edit(user.id)">--</td>
-        
-        </tr>
-       
-      </table>
-
+       <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addCriterion()">Add column</button>
+       <button (click) = "Edit(5)" id="btn1"> Save </button>
       
-
-
-     <button (click) = "Edit(5)" id="btn1"> Save </button>
-     <!----------------button for adding column------------------------------->
-     <!----   <button id="btn2" (click)="add_col()">Add column</button>   -->
+      </div>
+      
+  
     </div>
-
-
-  </div>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>

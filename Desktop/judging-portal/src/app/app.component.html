@@ -12,8 +12,8 @@
     <br><br>
 
     <div class="row">
-      <div class="col-lg-12">
-        <form [formGroup]="tableForm">
+      <div class="col-lg-12" style="overflow-x:auto;">
+        <form [formGroup]="tableForm">  
         <table class="table table-bordered">
           <thead>
             <th>Registration No.</th>
@@ -26,7 +26,7 @@
             <tr>
               <td><input type="text" formControlName="registrationNo"></td>
               <td><input type="text" formControlName ="criterion1"></td>
-              <div formArrayName="OtherCriterion" class="d-inline" style="width: auto" *ngFor="let criteria of OtherCriterion.controls; let i=index">
+              <div formArrayName="OtherCriterion" class="d-inline" *ngFor="let criteria of OtherCriterion.controls; let i=index">
               <td>
                <input type="text" [formControlName]="i">
               </td>
@@ -36,11 +36,38 @@
          
           </table>
         </form>
+
+        <form [formGroup]="tableForm2">  
+            <table class="table table-bordered">
+         
+    
+                <tr>
+                  <td><input type="text" formControlName="registrationNo"></td>
+                  <td><input type="text" formControlName ="criterion1"></td>
+                  <div formArrayName="OtherCriterion2" class="d-inline" *ngFor="let criteria2 of OtherCriterion2.controls; let j=index">
+                  <td>
+                   <input type="text" [formControlName]="i">
+                  </td>
+                  </div>
+                </tr>
+                
+             
+              </table>
+            </form>
+
+
+
+
+
+
+        
         {{tableForm.value | json}}
+        <!-- {{tableForm2.value | json}} -->
 
        <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addCriterion()">Add column</button>
        <button (click) = "Edit(5)" id="btn1"> Save </button>
-      
+       <button (click)="loadAPIData()" class="btn btn-secondary ml-2" type="button">Load API Data</button>
+        
       </div>
       
   

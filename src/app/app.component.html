@@ -1,0 +1,15 @@
+<div>
+  <form [formGroup] = "myForm" (ngSubmit)="save(myForm)">
+    <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
+      <div formGroupName = "{{i}}">
+        {{candidate.get('registrationNo').value}}
+        <input type="text" formControlName ="criteria1">
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addCriterion()">Add criteria</button>
+
+    <button type="submit" >submit</button>
+  </form>
+</div>
+
+{{myForm.value | json}}

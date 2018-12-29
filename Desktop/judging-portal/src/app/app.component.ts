@@ -22,7 +22,7 @@ export class AppComponent{
       registrationNo: new FormControl({value:'', disabled : true}), 
 
       criterion1: [''],
-      OtherCriterion: this.fb.array([]),
+      OtherCriterion: this.fb.array([]),    
     });
 
     this.tableForm2 = this.fb.group({

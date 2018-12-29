@@ -1,14 +1,34 @@
 <div>
   <form [formGroup] = "myForm" (ngSubmit)="save(myForm)">
+    <table class="table-bordered table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th>registrationNo</th>
+        <th>criteria</th>
+      </tr>
+      </thead>
+      <tr>
+          <td>Maximum Marks</td>
+          <td>{{mm}}</td>    
+    
+      </tr>
+    
     <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
       <div formGroupName = "{{i}}">
-        {{candidate.get('registrationNo').value}}
-        <input type="text" formControlName ="criteria1">
+      <tr>
+      <td> {{candidate.get('registrationNo').value}} </td>  
+      <td *ngIf ="EditRowId === candidate.get('id').value"><input type="text" formControlName ="criteria1"></td>
+      <td *ngIf ="EditRowId !== candidate.get('id').value" (click)="Edit(candidate.get('id').value)">-----</td>
+      
+      </tr>
       </div>
     </div>
+   
+    </table>
     <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addCriterion()">Add criteria</button>
 
     <button type="submit" >submit</button>
+    
   </form>
 </div>
 

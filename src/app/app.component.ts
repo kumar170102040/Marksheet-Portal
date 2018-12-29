@@ -59,11 +59,11 @@ export class AppComponent implements OnInit {
       })
     }
 
-    buildCriterion(): FormGroup{
-      return this.fb.group({
-        criteria:['']
-      })
-    }
+    // buildCriterion(): FormGroup{
+    //   return this.fb.group({
+    //     criteria:['']
+    //   })
+    // }
 
     
 

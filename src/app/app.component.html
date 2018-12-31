@@ -1,35 +1,70 @@
 <div>
   <form [formGroup] = "myForm" (ngSubmit)="save(myForm)">
     <table class="table-bordered table-hover">
+
       <thead class="thead-dark">
       <tr>
         <th>registrationNo</th>
-        <th>criteria</th>
+        
+        <!--adding heading to criterias using *ngFor -->
+        <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
+          <div [formGroupName] = "i">
+            <div formArrayName ="Othercriteria">
+              <div *ngFor = "let criteria of candidate.get('Othercriteria').controls;let j  = index;">
+                <div [formGroupName] = "j">
+                  <th *ngIf="i === 0">{{criteria.get('criteriaName').value}}</th>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </tr>
       </thead>
+
+      <tbody>
       <tr>
           <td>Maximum Marks</td>
-          <td>{{mm}}</td>    
+       <!--adding maximum marks row to the table using *ngFor -->
+       <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
+          <div [formGroupName] = "i">
+            <div formArrayName ="Othercriteria">
+              <div *ngFor = "let criteria of candidate.get('Othercriteria').controls;let j  = index;">
+                <div [formGroupName] = "j">
+                  <td *ngIf="i === 0">{{criteria.get('max_marks').value}}</td>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     
       </tr>
     
     <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
-      <div formGroupName = "{{i}}">
+      <div [formGroupName] = "i">
       <tr>
       <td> {{candidate.get('registrationNo').value}} </td>  
-      <td *ngIf ="EditRowId === candidate.get('id').value"><input type="text" formControlName ="criteria1"></td>
-      <td *ngIf ="EditRowId !== candidate.get('id').value" (click)="Edit(candidate.get('id').value)">-----</td>
-      
+      <!-- add columns of criteria using *ngFor -->
+      <div formArrayName ="Othercriteria">
+        <div *ngFor = "let criteria of candidate.get('Othercriteria').controls;let j  = index;">
+          <div [formGroupName] = "j">
+            <td *ngIf ="EditRowId === candidate.get('id').value"> <input type="text" formControlName ="marks"> </td>
+            <td *ngIf ="EditRowId !== candidate.get('id').value" (click)="Edit(candidate.get('id').value)" >-----</td>
+          </div>
+        </div>
+      </div> 
+
       </tr>
       </div>
     </div>
-   
+    </tbody>
     </table>
-    <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addCriterion()">Add criteria</button>
+   
 
     <button type="submit" >submit</button>
-    
   </form>
 </div>
-
+<button type="button" class="btn btn-primary btn-sm m-2" (click)=Edit(0) >Hide all</button>
+<br>
+<br>
 {{myForm.value | json}}

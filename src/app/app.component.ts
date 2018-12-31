@@ -1,22 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnInit {
     public myForm: FormGroup;
-    public mm = 10;
     public totalCriteria = 1;
     EditRowId: any ='';
-    arr2 = [{
-      'criteria':"0",
+   
+
+    criteria_data = [{
+      'criteriaName':"criteria1",
+      'mm':'100'
     },
     {
-      'criteria':"0",
+      'criteriaName':"criteria2",
+      'mm':'100'
     },
+    {
+      'criteriaName':"criteria3",
+      'mm':'100'
+    }
+  
     ];
+
     participant_data=[
       {
         'registrationNo':"001"
@@ -30,9 +40,7 @@ export class AppComponent implements OnInit {
       {
         'registrationNo':"004"
       },   
-      {
-        'registrationNo':"005"
-      }    
+   
     ]
     
 
@@ -48,43 +56,45 @@ export class AppComponent implements OnInit {
         });
     }
 
+    
     buildParticipant(participants , index): FormGroup{
-      
+      var arr2 = [];
+      for(var j = 0; j < this.criteria_data.length; j++){
+        arr2.push(this.buildCriteria(this.criteria_data[j] , j));
+      }
 
       return this.fb.group({
         id: [index +1],
         registrationNo: [participants.registrationNo],
-        criteria1:[''],
-        Othercriteria: this.fb.array([])
+        Othercriteria: this.fb.array(arr2)
       })
     }
-
-    // buildCriterion(): FormGroup{
-    //   return this.fb.group({
-    //     criteria:['']
-    //   })
-    // }
-
     
-
+    buildCriteria(criteria , index): FormGroup{
+      return this.fb.group({
+        criteriaName: criteria.criteriaName,
+        marks: [''],
+        max_marks: criteria.mm, 
+      })
+    } 
 
     get Participants(){
       return this.myForm.get('participants') as FormArray;
     }
-    get Othercriteria(){
-      return this.Participants.get('Othercriteria') as FormArray;
-    }
+    // get Othercriteria(){
+    //   return this.Participants.get('Othercriteria') as FormArray;
+    // }
   
     
-    addCriterion() {
-      //  this.Othercriteria.push(this.fb.control(''));
-      this.totalCriteria = this.totalCriteria  + 1;
-      console.log(this.totalCriteria);
-      this.arr2.push({
-        'criteria':"0",
-      });
-      console.log(this.arr2);
-    }
+    // addCriterion() {
+    //   //this.Othercriteria.push(this.fb.control(''));
+    //   this.totalCriteria = this.totalCriteria  + 1;
+    //   console.log(this.totalCriteria);
+    //   this.arr2.push({
+    //     'criteria':"0",
+    //   });
+    //   console.log(this.arr2);
+    // }
 
   Edit(val){
      this.EditRowId = val;
@@ -95,4 +105,8 @@ export class AppComponent implements OnInit {
   save(formData) {
     console.log(formData.value)
   }
+
+
+ 
+
 }

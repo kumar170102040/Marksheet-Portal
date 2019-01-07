@@ -1,3 +1,4 @@
+<script src="myscripts.js"></script>
 <div>
   <form [formGroup] = "myForm" (ngSubmit)="save(myForm)">
     <table class="table-bordered table-hover">
@@ -65,6 +66,11 @@
   </form>
 </div>
 <button type="button" class="btn btn-primary btn-sm m-2" (click)=Edit(0) >Hide all</button>
+<button type="button" class="btn btn-primary btn-sm m-2" (click)=loadApidata() >load data</button>
 <br>
 <br>
 {{myForm.value | json}}
+{{errorMsg}}
+<script>
+
+</script>

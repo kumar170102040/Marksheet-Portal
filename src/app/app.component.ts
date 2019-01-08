@@ -14,6 +14,7 @@ export class AppComponent implements OnInit{
     public myForm: FormGroup;
     public totalCriteria = 1;
     public errorMsg;
+    public DataSaved;
     EditRowId: any ='';
     public i:number = 0;
 
@@ -71,10 +72,11 @@ export class AppComponent implements OnInit{
       return this.fb.group({
         id: [index +1],
         registrationNo: [participants.registrationNo],
-        Othercriteria: this.fb.array(arr2)
+        criteriaArray: this.fb.array(arr2),
+        dataSaveCheck: false,
       })
     }
-    
+     
     buildCriteria(criteria , index): FormGroup{
       return this.fb.group({
         criteriaName: criteria.criteriaName,
@@ -113,8 +115,19 @@ export class AppComponent implements OnInit{
 
   save(formData) {
     console.log(formData.value);
-    // console.log(this.criteria_data );
-    // console.log(this.participant_data );
+    this.DataSaved = 0;
+
+    for(let i = 0  ; i < this.participant_data.length ; i++){
+      this.Participants.at(i).get('dataSaveCheck').value = true;
+    }
+  }
+  saveCandidateForm(CandidateForm , i){
+    console.log(CandidateForm.value);
+    this.Participants.at(i).get('dataSaveCheck').value = true;
+  }
+  changeButtonColor(i){
+    this.Participants.at(i).get('dataSaveCheck').value = false;
+    //console.log(this.Participants.at(i).get('dataSaveCheck').value);
   }
 
 }

@@ -27,4 +27,5 @@ export class DataService {
     return this.http.get<Icriteria[]>(this._url2).pipe(
       catchError(this.errorHandler));
   }
+  
 }

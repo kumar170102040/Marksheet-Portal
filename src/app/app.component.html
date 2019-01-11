@@ -1,35 +1,31 @@
-<script>
-    var count = 1;
-    function setColor(btn, color) {
-        var property = document.getElementById(btn);
-        if (count == 0) {
-            property.style.backgroundColor = "#FFFFFF"
-            count = 1;        
-        }
-        else {
-            property.style.backgroundColor = "#7FFF00"
-            count = 0;
-        }
-    }
-</script>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<div class ="page-header text-center">
+  <h1>Judging Portal</h1>
+</div>
 
-<div>
+  <div id="container">
+      <button type="button" class="btn btn-primary btn-sm m-2" (click)=Edit(0) >Hide all</button>
+      <button type="button" class="btn btn-primary btn-sm m-2" (click)=loadApidata() >Load data</button>
   <form [formGroup] = "myForm" (ngSubmit)="save(myForm )">
-    <table class="table-bordered table-hover">
+    <table class="table table-bordered table-hover">
 
       <thead class="thead-dark">
+        
       <tr>
-        <th>registrationNo</th>
+        <th class="text-center">registrationNo</th>
         
         <!--adding heading to criterias using *ngFor -->
         <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
           <div [formGroupName] = "i">
-            <div formArrayName ="criteriaArray">
-              <div *ngFor = "let criteria of candidate.get('criteriaArray').controls;let j  = index;">
-                <div [formGroupName] = "j">
-                  <th *ngIf="i === 0">{{criteria.get('criteriaName').value}}</th>
+            <div formArrayName ="criteriaArray" class="d-inline-block" *ngFor = "let criteria of candidate.get('criteriaArray').controls;let j  = index;">
+              
+                <div [formGroupName] = "j" >
+                    <th class="text-center" style="width: 100%" *ngIf="i === 0">{{criteria.get('criteriaName').value}}</th>
                 </div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -43,12 +39,11 @@
        <!--adding maximum marks row to the table using *ngFor -->
        <div formArrayName ="participants" *ngFor = "let candidate of myForm.controls.participants.controls;let i  = index;">
           <div [formGroupName] = "i">
-            <div formArrayName ="criteriaArray">
-              <div *ngFor = "let criteria of candidate.get('criteriaArray').controls;let j  = index;">
+            <div formArrayName ="criteriaArray" class="d-inline-block" *ngFor = "let criteria of candidate.get('criteriaArray').controls;let j  = index;">
                 <div [formGroupName] = "j">
-                  <td *ngIf="i === 0">{{criteria.get('max_marks').value}}</td>
+                  <td *ngIf="i === 0" >{{criteria.get('max_marks').value}}</td>
                 </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -60,14 +55,17 @@
       <tr>
       <td> {{candidate.get('registrationNo').value}} </td>  
       <!-- add columns of criteria using *ngFor -->
-      <div formArrayName ="criteriaArray">
-        <div *ngFor = "let criteria of candidate.get('criteriaArray').controls;let j  = index;">
+      <div formArrayName ="criteriaArray" class="d-inline-block"  *ngFor = "let criteria of candidate.get('criteriaArray').controls;let j  = index;">
+        
           <div [formGroupName] = "j">
+            
             <td *ngIf ="EditRowId === candidate.get('id').value"> <input type="text" formControlName ="marks" (click)="changeButtonColor(i)"> </td>
             <td *ngIf ="EditRowId !== candidate.get('id').value" (click)="Edit(candidate.get('id').value)" >-----</td>
+           
           </div>
-        </div>
+        
       </div> 
+
       <button *ngIf = "candidate.get('dataSaveCheck').value === true" type="button" value="candidate.get('id').value" class="btn btn-primary btn-sm m-2" (click)="saveCandidateForm(candidate , i )">save</button>
       <button *ngIf = "candidate.get('dataSaveCheck').value === false" type="button" value="candidate.get('id').value" class="btn btn-danger btn-sm m-2" (click)="saveCandidateForm(candidate , i )">save</button>
 
@@ -80,13 +78,11 @@
 
     <button type="submit" >Save All</button>
   </form>
+
 </div>
-<button type="button" class="btn btn-primary btn-sm m-2" (click)=Edit(0) >Hide all</button>
-<button type="button" class="btn btn-primary btn-sm m-2" (click)=loadApidata() >Load data</button>
+
 <br>
 <br>
 {{myForm.value | json}}
+<br>
 {{errorMsg}}
-<script>
-
-</script>
